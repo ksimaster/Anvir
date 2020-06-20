@@ -12,6 +12,9 @@ public class ClickScript : MonoBehaviour
     public int virusScore;
     public Text virusText;
 
+    public GameObject WinLosePanel;
+    public Text winLoseText;
+
     public float speedVirus;
     void Start()
     {
@@ -28,6 +31,7 @@ public class ClickScript : MonoBehaviour
         clickText.text = score.ToString();
         virusText.text = virusScore.ToString();
         //if (virusScore < 0) virusScore++;
+        WinOrLose();
 
     }
 
@@ -47,7 +51,7 @@ public class ClickScript : MonoBehaviour
 
     IEnumerator UpVirus()
     {
-        while (score < 1000) { 
+        while (score < 1000 || virusScore<1000) { 
             virusScore = virusScore + Random.Range(-2, 4);
             
             PlayerPrefs.SetInt("VirusScore+", virusScore);
@@ -58,5 +62,29 @@ public class ClickScript : MonoBehaviour
         }
     }
 
+    public void WinOrLose()
+    {
+        if (score >= 1000)
+        {
+            WinLosePanel.SetActive(true);
+            winLoseText.text = "Congratulations!/nYou win!";
+        }
+
+        if (virusScore >= 1000)
+        {
+            WinLosePanel.SetActive(true);
+            winLoseText.text = "Sorry.../nYou lose...";
+        }
+    }
+
+    public void OpenCloseWinLose()
+    {
+
+    }
+
+    public void CloseGame()
+    {
+        Application.Quit();
+    }
     
 }

@@ -66,20 +66,25 @@ public class ClickScript : MonoBehaviour
     {
         if (score >= 1000)
         {
-            WinLosePanel.SetActive(true);
+            OpenWinLose();
             winLoseText.text = "Congratulations!/nYou win!";
         }
 
         if (virusScore >= 1000)
         {
-            WinLosePanel.SetActive(true);
+            OpenWinLose();
             winLoseText.text = "Sorry.../nYou lose...";
         }
     }
 
-    public void OpenCloseWinLose()
+    public void OpenWinLose()
     {
+        WinLosePanel.SetActive(true);
+    }
 
+    public void CloseWinLose()
+    {
+        WinLosePanel.SetActive(false);
     }
 
     public void CloseGame()

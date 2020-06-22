@@ -12,30 +12,39 @@ public class ClickScript : MonoBehaviour
     public int virusScore;
     public Text virusText;
 
+    public GameObject StartPanel;
+
     public GameObject WinLosePanel;
     public Text winLoseText;
 
+    public GameObject ExitPanel;
+
     public float speedVirus;
+
+    public bool paused = false;
     void Start()
     {
-        score = 0;
-        score = PlayerPrefs.GetInt("Score+", score);
-        virusScore = 0;
-        virusScore = PlayerPrefs.GetInt("VirusScore+", virusScore);
-        StartCoroutine("UpVirus");
+        if(!StartPanel.activeSelf) StartPanel.SetActive(true);
     }
-
+   
    
     void Update()
     {
-        clickText.text = score.ToString();
-        virusText.text = virusScore.ToString();
+       /* clickText.text = score.ToString() + " / 1000";
+        virusText.text = virusScore.ToString(); */
+
         //if (virusScore < 0) virusScore++;
         WinOrLose();
-
+        PauseGame();
     }
 
-    
+    private void FixedUpdate()
+    {
+        clickText.text = score.ToString() + " / 1000";
+        virusText.text = virusScore.ToString();
+    }
+
+
     public void ClikerScore()
     {
         score++;
@@ -52,12 +61,12 @@ public class ClickScript : MonoBehaviour
     IEnumerator UpVirus()
     {
         while (score < 1000 || virusScore<1000) { 
-            virusScore = virusScore + Random.Range(-2, 4);
+            virusScore = virusScore + Random.Range(-1, 3);
             
             PlayerPrefs.SetInt("VirusScore+", virusScore);
             virusText.text = virusScore.ToString();
             if (virusScore <= 0) virusScore=1;
-            speedVirus = (2.0f / virusScore) + 0.0006f * score;
+            speedVirus = (3.2f / virusScore) + 0.0009f * score;
             yield return new WaitForSeconds(speedVirus);
         }
     }
@@ -67,24 +76,72 @@ public class ClickScript : MonoBehaviour
         if (score >= 1000)
         {
             OpenWinLose();
-            winLoseText.text = "Congratulations!/nYou win!";
+            winLoseText.text = "Congratulations! You win!";
         }
 
         if (virusScore >= 1000)
         {
             OpenWinLose();
-            winLoseText.text = "Sorry.../nYou lose...";
+            winLoseText.text = "Sorry... You lose...";
         }
+    }
+
+    public void NewGame()
+    {
+        score = 0;
+        score = PlayerPrefs.GetInt("Score+", score);
+        virusScore = 0;
+        virusScore = PlayerPrefs.GetInt("VirusScore+", virusScore);
+        StartCoroutine("UpVirus");
+    }
+
+    public void OpenStartPanel()
+    {
+        StopCoroutine("UpVirus");
+        if (!StartPanel.activeSelf) StartPanel.SetActive(true);
+       
+    }
+
+    public void CloseStartPanel()
+    {
+        StartCoroutine("UpVirus");
+        if (StartPanel.activeSelf) StartPanel.SetActive(false);
     }
 
     public void OpenWinLose()
     {
-        WinLosePanel.SetActive(true);
+        StopCoroutine("UpVirus");
+        if (!WinLosePanel.activeSelf) WinLosePanel.SetActive(true);
+    }
+
+
+    public void OpenExitPanel()
+    {
+        StopCoroutine("UpVirus");
+        if (!ExitPanel.activeSelf) ExitPanel.SetActive(true);
+    }
+
+    public void CloseExitPanel()
+    {
+        StartCoroutine("UpVirus");
+        if (ExitPanel.activeSelf) ExitPanel.SetActive(false);
     }
 
     public void CloseWinLose()
     {
-        WinLosePanel.SetActive(false);
+        if (WinLosePanel.activeSelf) WinLosePanel.SetActive(false);
+    }
+
+    public void PauseGame()
+    {
+        if(ExitPanel.activeSelf || StartPanel.activeSelf || WinLosePanel.activeSelf)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 
     public void CloseGame()

@@ -22,6 +22,8 @@ public class ClickScript : MonoBehaviour
     public float speedVirus;
 
     public bool paused = false;
+
+    public int MaxScore = 1000;
     void Start()
     {
         if(!StartPanel.activeSelf) StartPanel.SetActive(true);
@@ -60,26 +62,27 @@ public class ClickScript : MonoBehaviour
 
     IEnumerator UpVirus()
     {
-        while (score < 1000 || virusScore<1000) { 
+        while (score < MaxScore || virusScore< MaxScore) { 
             virusScore = virusScore + Random.Range(-1, 3);
             
             PlayerPrefs.SetInt("VirusScore+", virusScore);
             virusText.text = virusScore.ToString();
             if (virusScore <= 0) virusScore=1;
-            speedVirus = (3.2f / virusScore) + 0.0009f * score;
+            speedVirus = (3.7f / virusScore) + 0.009f * score;
             yield return new WaitForSeconds(speedVirus);
         }
     }
 
     public void WinOrLose()
     {
-        if (score >= 1000)
+       
+        if (score >= MaxScore)
         {
             OpenWinLose();
             winLoseText.text = "Congratulations! You win!";
         }
 
-        if (virusScore >= 1000)
+        if (virusScore >= MaxScore)
         {
             OpenWinLose();
             winLoseText.text = "Sorry... You lose...";

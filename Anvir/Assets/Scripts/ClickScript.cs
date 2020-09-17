@@ -79,13 +79,13 @@ public class ClickScript : MonoBehaviour
         if (score >= MaxScore)
         {
             OpenWinLose();
-            winLoseText.text = "Congratulations! You win!";
+            winLoseText.text = "Ты победил! Найдешь ещё одно лекарство?";
         }
 
         if (virusScore >= MaxScore)
         {
             OpenWinLose();
-            winLoseText.text = "Sorry... You lose...";
+            winLoseText.text = "Не получилось... Попробуешь еще?";
         }
     }
 

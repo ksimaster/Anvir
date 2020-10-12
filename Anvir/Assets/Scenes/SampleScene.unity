@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 102850650}
   - component: {fileID: 102850649}
   - component: {fileID: 102850648}
+  - component: {fileID: 102850651}
   m_Layer: 5
   m_Name: BonusAdsButton
   m_TagString: Untagged
@@ -356,7 +357,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1602181696}
-        m_MethodName: NewGame
+        m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -367,7 +368,18 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1602181696}
-        m_MethodName: PauseGame
+        m_MethodName: BonusClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 102850651}
+        m_MethodName: AdClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -413,6 +425,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102850646}
   m_CullTransparentMesh: 0
+--- !u!114 &102850651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102850646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab3f990021f30e64fb8cb0e96a0ba35c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &153494489
 GameObject:
   m_ObjectHideFlags: 0
@@ -3183,6 +3207,7 @@ MonoBehaviour:
   WinLosePanel: {fileID: 39782857}
   winLoseText: {fileID: 1950919395}
   ExitPanel: {fileID: 2057079909}
+  AdButton: {fileID: 102850648}
   speedVirus: 0
   paused: 0
   MaxScore: 1000

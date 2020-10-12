@@ -734,10 +734,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 09e15c64-c19b-4bbe-959e-d47033c6bf5f
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: HealthClicker
+  organizationId: psinagames
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

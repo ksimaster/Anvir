@@ -19,6 +19,8 @@ public class ClickScript : MonoBehaviour
 
     public GameObject ExitPanel;
 
+    public Button AdButton;
+
     public float speedVirus;
 
     public bool paused = false;
@@ -45,11 +47,15 @@ public class ClickScript : MonoBehaviour
         clickText.text = score.ToString() + " / 1000";
         virusText.text = virusScore.ToString();
     }
-
+    
+    public void BonusClick()
+    {
+        score += 50;
+    }
 
     public void ClikerScore()
     {
-        score++;
+        score++;    
         PlayerPrefs.SetInt("Score+", score);
     }
 
@@ -68,6 +74,7 @@ public class ClickScript : MonoBehaviour
             PlayerPrefs.SetInt("VirusScore+", virusScore);
             virusText.text = virusScore.ToString();
             if (virusScore <= 0) virusScore=1;
+            
             speedVirus = (3.7f / virusScore) + 0.009f * score;
             yield return new WaitForSeconds(speedVirus);
         }
@@ -79,7 +86,7 @@ public class ClickScript : MonoBehaviour
         if (score >= MaxScore)
         {
             OpenWinLose();
-            winLoseText.text = "Ты победил! Найдешь ещё одно лекарство?";
+            winLoseText.text = "Ты победил! Ещё раз?";
         }
 
         if (virusScore >= MaxScore)

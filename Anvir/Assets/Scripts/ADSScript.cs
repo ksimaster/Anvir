@@ -1,18 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 
 public class ADSScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        
+        if(Advertisement.isSupported)
+        {
+            Advertisement.Initialize("3860495", false);
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
+   public void AdClick()
     {
-        
+        if (Advertisement.IsReady())
+        {
+            Advertisement.Show("video");
+        }
     }
 }
